@@ -2,6 +2,7 @@
 clear
 
 echo 'Apache Benchmark script starts now. Task 3 for IOVIO TC'
+echo 'by: jctjavier'
 
 sudo apt-get update
 sudo apt-get -y install apache2-utils
