@@ -2,7 +2,7 @@
 ###### status : *complete*
 
 ## Pre-requisites
-1. Linux/Unix/Mac Terminal
+- Linux/Unix/Mac OS
 
 ## Instructions to run and view performance test
 1. You may either clone or copy the shellscript into your computer.
