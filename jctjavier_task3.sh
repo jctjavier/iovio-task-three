@@ -9,29 +9,32 @@ sudo apt-get -y install apache2-utils
 sudo apt-get -y install gnuplot
 sudo apt-get -y install feh
 
-echo '# output as png image 
-set terminal png
-
-# save file to "benchmark.png"
+echo 'set terminal png size 500,500
+# This sets the aspect ratio of the graph
+set size 1, 1
+# The file we will write to 
 set output "benchmark.png"
-
-# graph title
-set title "ab -n 2 -c 10 -g out.data https://iovio.com/"
-
-#nicer aspect ratio for image size
-set size 1,0.7
-
-# y-axis grid
+# The graph title
+set title "Benchmark Testing - IOVIO.com"
+# Where to place the legend/key
+set key left top
+# Draw gridlines oriented on the y axis
 set grid y
-
-#x-axis label
-set xlabel "request"
-
-#y-axis label
+# Specify that the x-series data is time data
+set xdata time
+# Specify the *input* format of the time data
+set timefmt "%s"
+# Specify the *output* format for the x-axis tick labels
+set format x "%S"
+# Label the x-axis
+set xlabel "seconds"
+# Label the y-axis
 set ylabel "response time (ms)"
-
-#plot data from "out.data" using column 9 with smooth sbezier lines
-plot "out.data" using 9 smooth sbezier with lines title "iovio.com"' >> apache-benchmark.p
+# Tell gnuplot to use tabs as the delimiter instead of spaces (default)
+set datafile separator "\t"
+# Plot the data
+plot "out.data" every ::2 using 2:5 title "response time" with points
+exit' > apache-benchmark.p
 
 ab -c 2 -n 10 -g out.data https://iovio.com/
 
